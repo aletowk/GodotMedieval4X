@@ -1,0 +1,11 @@
+{
+    "TILEMAP_PROCEDURAL_CONF":
+    {
+        "ocean" 	: {"id" : 2, "cap" : -0.6, "type" : "ocean"},
+        "water" 	: {"id" : 4, "cap" : -0.1, "type" : "water" },
+        "sand" 		: {"id" : 3, "cap" : 0.1,  "type" : "sand" },
+        "grass"    	: {"id" : 0, "cap" : 0.7,  "type" : "grass" },
+        "mountain" 	: {"id" : 1, "cap" : 0.8,  "type" : "mountain" },
+        "snow" 		: {"id" : 5, "cap" : 0.9,  "type" : "snow"}
+    }
+}

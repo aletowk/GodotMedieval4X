@@ -1,6 +1,6 @@
 extends Camera2D
 
-export var speed = 10.0
+export var speed = 50.0
 
 export var zoomspeed = 10.0
 export var zoommargin = 0.1
@@ -32,7 +32,7 @@ func _process(delta):
 	zoom.y = clamp(zoom.y,zoomMin,zoomMax)
 
 	if not zooming:
-		zoomfactor = 0
+		zoomfactor = 1.0
 
 func _input(event):
 	if(abs(zoompos.x - get_global_mouse_position().x) > zoommargin):
@@ -44,10 +44,10 @@ func _input(event):
 		if(event.is_pressed()):
 			zooming = true
 			if(event.button_index == BUTTON_WHEEL_UP):
-				zoomfactor -= 0.01* zoomspeed
+				zoomfactor -= 0.01 * zoomspeed
 				zoompos = get_global_mouse_position()
 			if(event.button_index == BUTTON_WHEEL_DOWN):
 					zoomfactor += 0.01 * zoomspeed
 					zoompos = get_global_mouse_position()
-			else:
-				zooming = false
+		else:
+			zooming = false
