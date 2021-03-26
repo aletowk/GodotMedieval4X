@@ -1,63 +1,40 @@
 class_name Tile
-const MAX_FISH_ON_OCEAN = 10
-const MAX_FISH_ON_WATER = 5
 
-const MAX_FOOD_ON_GRASS = 5
-const MAX_WOOD_ON_GRASS = 10
-
-const MAX_FOOD_ON_MOUNTAIN = 1
-const MAX_WOOD_ON_MOUNTAIN = 2
-const MAX_STONE_ON_MOUNTAIN = 20
 
 var type
+var position
 var owner_player
 var available_ressources
+var tile_ressource_config
 
-func _init(_type):
+func _init(_type,pos_x,pos_y):
 	type = _type
+	position = Vector2(pos_x,pos_y)
 	owner_player = "None"
+	tile_ressource_config = read_ressource_config()["RESSOURCES_CONF"]
 	compute_ressources()
 
 func compute_ressources():
-	available_ressources = []
-	if(type == "ocean"):
-		var amount = randi() %  MAX_FISH_ON_OCEAN
-		var fish_ressource = {"type" : "fish", "amount" : amount}
-		available_ressources.append(fish_ressource)
-	elif (type == "water"):
-		var amount = randi() %  MAX_FISH_ON_WATER
-		var fish_ressource = {"type" : "fish", "amount" : amount}
-		available_ressources.append(fish_ressource)
-	elif (type == "sand"):
-		pass
-	elif (type == "grass"):
-		var amount = randi() %  MAX_FOOD_ON_GRASS
-		var tmp_ressource = {"type" : "food", "amount" : amount}
-		available_ressources.append(tmp_ressource)
-	
-		amount = randi() %  MAX_WOOD_ON_GRASS
-		tmp_ressource = {"type" : "wood", "amount" : amount}
-		available_ressources.append(tmp_ressource)
-	elif (type == "mountain"):
-		var amount = randi() %  MAX_FOOD_ON_GRASS
-		var tmp_ressource = {"type" : "food", "amount" : amount}
-		available_ressources.append(tmp_ressource)
-	
-		amount = randi() %  MAX_WOOD_ON_MOUNTAIN
-		tmp_ressource = {"type" : "wood", "amount" : amount}
-		available_ressources.append(tmp_ressource)
-
-		amount = randi() %  MAX_STONE_ON_MOUNTAIN
-		tmp_ressource = {"type" : "stone", "amount" : amount}
-		available_ressources.append(tmp_ressource)
-		
+	var max_amount : int = 0
+	available_ressources = {}
+	if(type in tile_ressource_config):
+		for key in tile_ressource_config[type]:
+			max_amount = tile_ressource_config[type][key]
+			if(max_amount > 0):
+				available_ressources[key] = randi() % max_amount
 
 func get_description_str():
 	var s = ""
-
 	s += "Tile type    : " + type + "\n"
+	s += "Position     : " + str(position.x) + "," + str(position.y) + "\n"
 	s += "Owner player : " + owner_player + "\n"
 	s += "Available Ressources :\n"
-	for res in available_ressources:
-		s += res.type + " : " + str(res.amount) + "\n"
+	s += str(available_ressources) + "\n"
 	return s
+
+func read_ressource_config():
+	var file = File.new()
+	file.open("res://Config/ressources_config.json",file.READ)
+	var txt = file.get_as_text()
+	file.close()
+	return parse_json(txt)

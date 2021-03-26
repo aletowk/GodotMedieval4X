@@ -62,7 +62,7 @@ func make_map():
 				set_tile(x,y,TILEMAP_CONF["snow"]["type"])
 
 func set_tile(x : int,y : int, tile_type):
-	tile_array[x][y] = Tile.new(tile_type)
+	tile_array[x][y] = Tile.new(tile_type,x,y)
 
 func get_tile(x : int, y : int): 
 	if(x >= 0 and x < map_size.x):
