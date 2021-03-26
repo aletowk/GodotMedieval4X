@@ -1,0 +1,47 @@
+{
+    "RESSOURCES_CONF":
+    {
+        "ocean" 	: 
+        {   
+            "food" : 10,
+            "wood" : 0,
+            "rocks": 0
+        },
+        "water" 	: 
+        {   
+            "food" : 5,
+            "wood" : 0,
+            "rocks": 0
+        },
+        "sand" 	: 
+        {   
+            "food" : 0,
+            "wood" : 2,
+            "rocks": 2
+        },
+        "grass" 	: 
+        {   
+            "food" : 5,
+            "wood" : 10,
+            "rocks": 2
+        },
+        "mountain" 	: 
+        {   
+            "food" : 2,
+            "wood" : 5,
+            "rocks": 10
+        },
+        "snow" 	: 
+        {   
+            "food" : 0,
+            "wood" : 0,
+            "rocks": 2
+        }
+    },
+    "START_PLAYER_RESSOURCES":
+    { 
+        "food"  : 10,
+        "wood"  : 10,
+        "rocks" : 10
+    }
+}
